@@ -1,6 +1,7 @@
 package fatec.poo.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 /**
@@ -28,14 +29,14 @@ public class Registro {
         this.dataSaida = dataSaida;
     }
 
-    public void setHospede(Hospede hospede) {
-        this.hospede = hospede;
-    }
 
     public void setRecepcionista(Recepcionista recepcionista) {
         this.recepcionista = recepcionista;
     }
-    
+
+    public void setHospede(Hospede hospede) {
+        this.hospede = hospede;
+    }
 
     public int getCodigo() {
         return codigo;
@@ -49,19 +50,44 @@ public class Registro {
         return dataSaida;
     }
 
+    public Hospede getHospede() {
+        return hospede;
+    }
+
+    public Recepcionista getRecepcionista() {
+        return recepcionista;
+    }
+    
+
     public double getValorHospedagem() {
         return valorHospedagem;
     }
     
     public void addServico(ServicoQuarto servico) {
-        this.servicosQuarto.add(servico);
+        servicosQuarto.add(servico);
     }
 
     public Quarto getQuarto() {
         return quarto;
     }
 
-    public void setQuarto(Quarto quarto) {
+    
+    public void reservarQuarto(Hospede hospede, Quarto quarto){
+        quarto.reservar();
+        this.hospede = hospede;
         this.quarto = quarto;
     }
+    
+    public double liberarQuarto() {
+        long qtdDias = ChronoUnit.DAYS.between(dataEntrada,dataSaida);
+        System.out.println(qtdDias);
+        System.out.println(quarto.getTotalFaturado());
+        double totalFat = quarto.liberar(qtdDias);
+        double totalServ = 0;
+        for (ServicoQuarto s : servicosQuarto) {
+            totalServ += s.getValor();
+        }
+        return totalFat*(1-(hospede.getTaxaDesconto()/100)) + totalServ;
+    }
+
 }

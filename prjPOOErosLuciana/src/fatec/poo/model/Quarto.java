@@ -25,7 +25,7 @@ public class Quarto {
         return tipo;
     }
 
-    public boolean isSituacao() {
+    public boolean getSituacao() {
         return situacao;
     }
 
@@ -41,7 +41,7 @@ public class Quarto {
         situacao = true;
     }
     
-    public double liberar(int qtdDias) {
+    public double liberar(long qtdDias) {
         situacao = false;
         totalFaturado = qtdDias*valorDiaria;
         return totalFaturado;
