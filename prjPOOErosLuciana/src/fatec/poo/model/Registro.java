@@ -1,6 +1,7 @@
 package fatec.poo.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -13,11 +14,14 @@ public class Registro {
     private double valorHospedagem;
     private Hospede hospede;
     private Recepcionista recepcionista;
+    private ArrayList<ServicoQuarto> servicosQuarto;
+    private Quarto quarto;
 
     public Registro(int codigo, LocalDate dataEntrada, Recepcionista recepcionista) {
         this.codigo = codigo;
         this.dataEntrada = dataEntrada;
         this.recepcionista = recepcionista;
+        servicosQuarto = new ArrayList<ServicoQuarto>();
     }
 
     public void setDataSaida(LocalDate dataSaida) {
@@ -49,4 +53,15 @@ public class Registro {
         return valorHospedagem;
     }
     
+    public void addServico(ServicoQuarto servico) {
+        this.servicosQuarto.add(servico);
+    }
+
+    public Quarto getQuarto() {
+        return quarto;
+    }
+
+    public void setQuarto(Quarto quarto) {
+        this.quarto = quarto;
+    }
 }
