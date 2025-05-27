@@ -43,7 +43,8 @@ public class Quarto {
     
     public double liberar(long qtdDias) {
         situacao = false;
-        totalFaturado = qtdDias*valorDiaria;
-        return totalFaturado;
+        double valorHosp = qtdDias*valorDiaria;
+        totalFaturado += valorHosp;
+        return valorHosp;
     }
 }

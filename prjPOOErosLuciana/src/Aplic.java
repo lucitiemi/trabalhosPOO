@@ -20,22 +20,41 @@ public class Aplic {
         hosp.setTaxaDesconto(10);
         serv.setValor(20);
         
-        System.out.println(quarto.getSituacao());
+        System.out.println("Situacao quarto: " + quarto.getSituacao());
         
         Registro reg = new Registro(456, LocalDate.of(2025, 5, 1), recep);
         reg.reservarQuarto(hosp, quarto);
         reg.addServico(serv);
         
-        System.out.println(quarto.getSituacao());
-        System.out.println(reg.getHospede().getNome());
-        System.out.println(serv.getValor());
-        System.out.println(reg.getQuarto().getNumero());
+        System.out.println("Situacao quarto: " + quarto.getSituacao());
+        System.out.println("Nome hospede: " + reg.getHospede().getNome());
+        System.out.println("Nome recepcionista: " + reg.getRecepcionista().getNome());
+        System.out.println("Valor seviço: " + serv.getValor());
+        System.out.println("Numero do quarto: " + reg.getQuarto().getNumero());
         
         reg.setDataSaida(LocalDate.of(2025, 5, 5));
         
-        double totalPagar = reg.liberarQuarto();
+        double valorHosp1 = reg.liberarQuarto();
         
-        System.out.println(totalPagar);
+        System.out.println("Valor primeira hospedagem " + valorHosp1);
+        System.out.println("Total faturado quarto: " + quarto.getTotalFaturado());
+        System.out.println("Situacao quarto: " + quarto.getSituacao());
+        
+        Registro reg2 = new Registro(789, LocalDate.of(2025, 5, 1), recep);
+        reg2.reservarQuarto(hosp, quarto);
+        
+        System.out.println("Situacao quarto: " + quarto.getSituacao());
+        System.out.println("Nome hospede: " + reg2.getHospede().getNome());
+        System.out.println("Nome recepcionista: " + reg2.getRecepcionista().getNome());
+        System.out.println("Numero do quarto: " + reg2.getQuarto().getNumero());
+        
+        reg2.setDataSaida(LocalDate.of(2025, 5, 5));
+        
+        double valorHosp2 = reg2.liberarQuarto();
+        
+        System.out.println("Valor segunda hospedagem " + valorHosp2);
+        System.out.println("Total faturado quarto: " + quarto.getTotalFaturado());
+        System.out.println("Situacao quarto: " + quarto.getSituacao());
         
         
     }

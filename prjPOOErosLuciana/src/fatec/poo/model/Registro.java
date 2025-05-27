@@ -80,8 +80,6 @@ public class Registro {
     
     public double liberarQuarto() {
         long qtdDias = ChronoUnit.DAYS.between(dataEntrada,dataSaida);
-        System.out.println(qtdDias);
-        System.out.println(quarto.getTotalFaturado());
         double totalFat = quarto.liberar(qtdDias);
         double totalServ = 0;
         for (ServicoQuarto s : servicosQuarto) {
