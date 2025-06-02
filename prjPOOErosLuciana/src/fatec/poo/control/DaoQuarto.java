@@ -81,8 +81,4 @@ public class DaoQuarto {
             System.out.println(ex.toString());
         }
     }
-        
-    
-    
-    
 }

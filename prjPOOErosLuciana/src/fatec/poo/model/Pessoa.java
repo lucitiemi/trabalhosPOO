@@ -13,6 +13,10 @@ public class Pessoa {
         this.nome = nome;
     }
 
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+    
     public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
