@@ -234,7 +234,7 @@ public class GuiRecepcionista extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        prepCon = new PreparaConexao("LTS","lutiemi");
+        prepCon = new PreparaConexao("ESC","ESC");
         prepCon.setDriver("oracle.jdbc.driver.OracleDriver");
         prepCon.setConnectionString("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1");       
         daoRecepcionista = new DaoRecepcionista(prepCon.abrirConexao());
@@ -259,7 +259,7 @@ public class GuiRecepcionista extends javax.swing.JFrame {
                 rdbTarde.setEnabled(true);
                 rdbNoite.setEnabled(true);
 
-                txtNome.requestFocus();;
+                txtNome.requestFocus();
 
                 btnConsultar.setEnabled(false);
                 btnInserir.setEnabled(true);
@@ -285,7 +285,7 @@ public class GuiRecepcionista extends javax.swing.JFrame {
                 rdbTarde.setEnabled(true);
                 rdbNoite.setEnabled(true);
 
-                txtNome.requestFocus();;
+                txtNome.requestFocus();
 
                 btnConsultar.setEnabled(false);
                 btnInserir.setEnabled(false);
@@ -300,8 +300,6 @@ public class GuiRecepcionista extends javax.swing.JFrame {
             txtRegFunc.setText(null);
             txtRegFunc.requestFocus();
         }
-        
-        
     }//GEN-LAST:event_btnConsultarActionPerformed
 
     private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
@@ -332,7 +330,7 @@ public class GuiRecepcionista extends javax.swing.JFrame {
         rdbTarde.setEnabled(false);
         rdbNoite.setEnabled(false);
 
-        txtRegFunc.requestFocus();;
+        txtRegFunc.requestFocus();
 
         btnConsultar.setEnabled(true);
         btnInserir.setEnabled(false);
@@ -369,7 +367,7 @@ public class GuiRecepcionista extends javax.swing.JFrame {
             rdbTarde.setEnabled(false);
             rdbNoite.setEnabled(false);
 
-            txtRegFunc.requestFocus();;
+            txtRegFunc.requestFocus();
 
             btnConsultar.setEnabled(true);
             btnInserir.setEnabled(false);
@@ -397,7 +395,7 @@ public class GuiRecepcionista extends javax.swing.JFrame {
             rdbTarde.setEnabled(false);
             rdbNoite.setEnabled(false);
 
-            txtRegFunc.requestFocus();;
+            txtRegFunc.requestFocus();
 
             btnConsultar.setEnabled(true);
             btnInserir.setEnabled(false);

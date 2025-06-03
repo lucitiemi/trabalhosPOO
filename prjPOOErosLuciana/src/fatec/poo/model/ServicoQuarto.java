@@ -17,6 +17,11 @@ public class ServicoQuarto {
     public void setValor(double valor) {
         this.valor = valor;
     }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+    
     
     public int getCodigo() {
         return codigo;

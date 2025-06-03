@@ -5,6 +5,11 @@
  */
 package fatec.poo.view;
 
+import fatec.poo.control.DaoServicoQuarto;
+import fatec.poo.control.PreparaConexao;
+import fatec.poo.model.ServicoQuarto;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author ltshi
@@ -42,6 +47,14 @@ public class GuiServico extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro Serviço de Quarto");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jLabel1.setText("Código");
 
@@ -50,18 +63,38 @@ public class GuiServico extends javax.swing.JFrame {
         btnConsultar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/pesq.png"))); // NOI18N
         btnConsultar.setText("Consultar");
         btnConsultar.setToolTipText("");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         btnInserir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/add.png"))); // NOI18N
         btnInserir.setText("Inserir");
         btnInserir.setEnabled(false);
+        btnInserir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInserirActionPerformed(evt);
+            }
+        });
 
         btnAlterar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Alterar.png"))); // NOI18N
         btnAlterar.setText("Alterar");
         btnAlterar.setEnabled(false);
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarActionPerformed(evt);
+            }
+        });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/Eraser.png"))); // NOI18N
         btnExcluir.setText("Excluir");
         btnExcluir.setEnabled(false);
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/fatec/poo/view/icon/exit.png"))); // NOI18N
         btnSair.setText("Sair");
@@ -73,6 +106,7 @@ public class GuiServico extends javax.swing.JFrame {
         });
 
         cbxDescricao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Água", "Doce", "Lanche", "Refrigerante", "Salgado" }));
+        cbxDescricao.setEnabled(false);
 
         jLabel3.setText("Valor");
         jLabel3.setToolTipText("");
@@ -140,6 +174,127 @@ public class GuiServico extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
 
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        try {
+            int codServ = Integer.parseInt(txtCodigo.getText());
+            servicoQuarto = null;
+            servicoQuarto = daoServQuarto.consultar(codServ);
+            
+            if(servicoQuarto == null) {
+                txtCodigo.setEnabled(false);
+                cbxDescricao.setEnabled(true);
+                txtValor.setEnabled(true);
+                
+                txtValor.requestFocus();
+                
+                btnConsultar.setEnabled(false);
+                btnInserir.setEnabled(true);
+                btnAlterar.setEnabled(false);
+                btnExcluir.setEnabled(false);
+            } else {
+                cbxDescricao.setSelectedItem(servicoQuarto.getDescricao());
+                txtValor.setText(String.valueOf(servicoQuarto.getValor()));
+                
+                txtCodigo.setEnabled(false);
+                cbxDescricao.setEnabled(true);
+                txtValor.setEnabled(true);
+                
+                txtValor.requestFocus();
+                
+                btnConsultar.setEnabled(false);
+                btnInserir.setEnabled(false);
+                btnAlterar.setEnabled(true);
+                btnExcluir.setEnabled(true);
+            }
+        } catch (NumberFormatException ex){
+            JOptionPane.showMessageDialog(this,
+                "Digite um número inteiro válido para o código do serviço.",
+                "Entrada inválida",
+                JOptionPane.WARNING_MESSAGE);
+            txtCodigo.setText(null);
+            txtCodigo.requestFocus();
+        }
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInserirActionPerformed
+        servicoQuarto = new ServicoQuarto(Integer.parseInt(txtCodigo.getText()), cbxDescricao.getSelectedItem().toString());
+        servicoQuarto.setValor(Double.parseDouble(txtValor.getText()));
+        daoServQuarto.inserir(servicoQuarto);
+        
+        // reinicia a GUI
+        txtCodigo.setText(null);
+        cbxDescricao.setSelectedItem(null);
+        txtValor.setText(null);
+        
+        txtCodigo.setEnabled(true);
+        cbxDescricao.setEnabled(false);
+        txtValor.setEnabled(false);
+
+        txtCodigo.requestFocus();
+
+        btnConsultar.setEnabled(true);
+        btnInserir.setEnabled(false);
+        btnAlterar.setEnabled(false);
+        btnExcluir.setEnabled(false);
+    }//GEN-LAST:event_btnInserirActionPerformed
+
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Confirmar alteração?") == 0) {
+            servicoQuarto.setDescricao(cbxDescricao.getSelectedItem().toString());
+            servicoQuarto.setValor(Double.parseDouble(txtValor.getText()));
+            daoServQuarto.alretar(servicoQuarto);
+            
+            // reinicia a GUI
+            txtCodigo.setText(null);
+            cbxDescricao.setSelectedItem(null);
+            txtValor.setText(null);
+
+            txtCodigo.setEnabled(true);
+            cbxDescricao.setEnabled(false);
+            txtValor.setEnabled(false);
+
+            txtCodigo.requestFocus();
+
+            btnConsultar.setEnabled(true);
+            btnInserir.setEnabled(false);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnAlterarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if (JOptionPane.showConfirmDialog(null, "Confirmar exclusão?") == 0) {
+            daoServQuarto.excluir(servicoQuarto); 
+            
+            // reinicia a GUI
+            txtCodigo.setText(null);
+            cbxDescricao.setSelectedItem(null);
+            txtValor.setText(null);
+
+            txtCodigo.setEnabled(true);
+            cbxDescricao.setEnabled(false);
+            txtValor.setEnabled(false);
+
+            txtCodigo.requestFocus();
+
+            btnConsultar.setEnabled(true);
+            btnInserir.setEnabled(false);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        prepCon = new PreparaConexao("ESC","ESC");
+        prepCon.setDriver("oracle.jdbc.driver.OracleDriver");
+        prepCon.setConnectionString("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1");       
+        daoServQuarto = new DaoServicoQuarto(prepCon.abrirConexao());
+    }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        prepCon.fecharConexao();
+    }//GEN-LAST:event_formWindowClosed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -156,4 +311,8 @@ public class GuiServico extends javax.swing.JFrame {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
+    
+    private ServicoQuarto servicoQuarto;
+    private DaoServicoQuarto daoServQuarto;
+    private PreparaConexao prepCon;
 }
