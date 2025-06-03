@@ -194,7 +194,7 @@ public class GuiQuarto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        prepCon = new PreparaConexao("ESC","ESC");
+        prepCon = new PreparaConexao("LTS","lutiemi");
         prepCon.setDriver("oracle.jdbc.driver.OracleDriver");
         prepCon.setConnectionString("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1");       
         daoQuarto = new DaoQuarto(prepCon.abrirConexao());
@@ -313,24 +313,24 @@ public class GuiQuarto extends javax.swing.JFrame {
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if (JOptionPane.showConfirmDialog(null, "Confirmar exclusão?") == 0) {
             daoQuarto.excluir(quarto);
+            
+            // inicializando a GUI
+            txtNumQuarto.setText(null);
+            txtValDiaria.setText(null);
+            rdbSolteiro.setSelected(true);
+
+            txtNumQuarto.setEnabled(true);
+            txtValDiaria.setEnabled(false);
+            rdbSolteiro.setEnabled(false);
+            rdbCasal.setEnabled(false);
+
+            txtNumQuarto.requestFocus();
+
+            btnConsultar.setEnabled(true);
+            btnInserir.setEnabled(false);
+            btnAlterar.setEnabled(false);
+            btnExcluir.setEnabled(false);
         }
-        
-        // inicializando a GUI
-        txtNumQuarto.setText(null);
-        txtValDiaria.setText(null);
-        rdbSolteiro.setSelected(true);
-
-        txtNumQuarto.setEnabled(true);
-        txtValDiaria.setEnabled(false);
-        rdbSolteiro.setEnabled(false);
-        rdbCasal.setEnabled(false);
-
-        txtNumQuarto.requestFocus();
-
-        btnConsultar.setEnabled(true);
-        btnInserir.setEnabled(false);
-        btnAlterar.setEnabled(false);
-        btnExcluir.setEnabled(false);
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     

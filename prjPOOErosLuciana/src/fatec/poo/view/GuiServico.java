@@ -185,7 +185,7 @@ public class GuiServico extends javax.swing.JFrame {
                 cbxDescricao.setEnabled(true);
                 txtValor.setEnabled(true);
                 
-                txtValor.requestFocus();
+                cbxDescricao.requestFocus();
                 
                 btnConsultar.setEnabled(false);
                 btnInserir.setEnabled(true);
@@ -199,7 +199,7 @@ public class GuiServico extends javax.swing.JFrame {
                 cbxDescricao.setEnabled(true);
                 txtValor.setEnabled(true);
                 
-                txtValor.requestFocus();
+                cbxDescricao.requestFocus();
                 
                 btnConsultar.setEnabled(false);
                 btnInserir.setEnabled(false);
@@ -285,7 +285,7 @@ public class GuiServico extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        prepCon = new PreparaConexao("ESC","ESC");
+        prepCon = new PreparaConexao("LTS","lutiemi");
         prepCon.setDriver("oracle.jdbc.driver.OracleDriver");
         prepCon.setConnectionString("jdbc:oracle:thin:@127.0.0.1:1521/XEPDB1");       
         daoServQuarto = new DaoServicoQuarto(prepCon.abrirConexao());
