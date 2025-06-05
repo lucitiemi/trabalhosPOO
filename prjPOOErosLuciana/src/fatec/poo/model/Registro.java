@@ -85,7 +85,8 @@ public class Registro {
         for (ServicoQuarto s : servicosQuarto) {
             totalServ += s.getValor();
         }
-        return totalFat*(1-(hospede.getTaxaDesconto()/100)) + totalServ;
+        valorHospedagem = totalFat*(1-(hospede.getTaxaDesconto()/100)) + totalServ;   // VERIFICAR COM O DIMAS SE EH ISSO (CORRECAO TRABALHO 01)
+        return valorHospedagem;
     }
 
 }
