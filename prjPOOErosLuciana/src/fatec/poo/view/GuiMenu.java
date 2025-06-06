@@ -33,6 +33,7 @@ public class GuiMenu extends javax.swing.JFrame {
         jMenuItemRecepc = new javax.swing.JMenuItem();
         jMenuItemHospede = new javax.swing.JMenuItem();
         jMenuItemServico = new javax.swing.JMenuItem();
+        jMenuItemRegistro = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Hotel POO");
@@ -50,7 +51,6 @@ public class GuiMenu extends javax.swing.JFrame {
 
         jMenuItemRecepc.setText("Recepcionista");
         jMenuItemRecepc.setToolTipText("");
-        jMenuItemRecepc.setActionCommand("Recepcionista");
         jMenuItemRecepc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItemRecepcActionPerformed(evt);
@@ -74,6 +74,14 @@ public class GuiMenu extends javax.swing.JFrame {
             }
         });
         jMenuCadastro.add(jMenuItemServico);
+
+        jMenuItemRegistro.setText("Registro");
+        jMenuItemRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItemRegistroActionPerformed(evt);
+            }
+        });
+        jMenuCadastro.add(jMenuItemRegistro);
 
         jMenuBar1.add(jMenuCadastro);
 
@@ -112,6 +120,11 @@ public class GuiMenu extends javax.swing.JFrame {
         GuiServico guiServico = new GuiServico();
         guiServico.setVisible(true);
     }//GEN-LAST:event_jMenuItemServicoActionPerformed
+
+    private void jMenuItemRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemRegistroActionPerformed
+        GuiRegistro guiRegistro = new GuiRegistro();
+        guiRegistro.setVisible(true);
+    }//GEN-LAST:event_jMenuItemRegistroActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,6 +167,7 @@ public class GuiMenu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItemHospede;
     private javax.swing.JMenuItem jMenuItemQuarto;
     private javax.swing.JMenuItem jMenuItemRecepc;
+    private javax.swing.JMenuItem jMenuItemRegistro;
     private javax.swing.JMenuItem jMenuItemServico;
     // End of variables declaration//GEN-END:variables
 }
